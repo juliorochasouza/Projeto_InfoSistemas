@@ -3,14 +3,14 @@
 	<Transactions>
     <Transaction>2020/05/17 14:17:49.000.761,=C:\Users\julio\OneDrive\Documentos\Embarcadero\Studio\Projects\AppletModule1.pas</Transaction>
     <Transaction>2021/01/30 06:49:17.000.943,=C:\Users\julio\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2021/01/30 06:50:43.000.757,D:\Projetos\Projeto InforSistemas\uFrmMenu.dfm=C:\Users\julio\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
-    <Transaction>2021/01/30 06:50:43.000.757,D:\Projetos\Projeto InforSistemas\uFrmMenu.pas=C:\Users\julio\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2021/01/30 06:50:59.000.512,D:\Projetos\Projeto InforSistemas\prjSistemaInfo.dproj=C:\Users\julio\OneDrive\Documentos\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2021/01/30 06:50:43.000.757,C:\Users\julio\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas=D:\Projetos\Projeto InforSistemas\uFrmMenu.pas</Transaction>
+    <Transaction>2021/01/30 06:50:43.000.757,C:\Users\julio\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.dfm=D:\Projetos\Projeto InforSistemas\uFrmMenu.dfm</Transaction>
+    <Transaction>2021/01/30 06:50:59.000.512,C:\Users\julio\OneDrive\Documentos\Embarcadero\Studio\Projects\Project1.dproj=D:\Projetos\Projeto InforSistemas\prjSistemaInfo.dproj</Transaction>
     <Transaction>2021/01/30 06:52:50.000.917,=D:\Projetos\Projeto InforSistemas\uCadastroClientes.pas</Transaction>
     <Transaction>2021/01/30 12:53:56.000.619,=D:\Projetos\Projeto InforSistemas\Unit1.pas</Transaction>
-    <Transaction>2021/01/30 12:54:22.000.558,D:\Projetos\Projeto InforSistemas\uConfiguracoes.dfm=D:\Projetos\Projeto InforSistemas\Unit1.dfm</Transaction>
-    <Transaction>2021/01/30 12:54:22.000.558,D:\Projetos\Projeto InforSistemas\uConfiguracoes.pas=D:\Projetos\Projeto InforSistemas\Unit1.pas</Transaction>
+    <Transaction>2021/01/30 12:54:22.000.558,D:\Projetos\Projeto InforSistemas\Unit1.dfm=D:\Projetos\Projeto InforSistemas\uConfiguracoes.dfm</Transaction>
+    <Transaction>2021/01/30 12:54:22.000.558,D:\Projetos\Projeto InforSistemas\Unit1.pas=D:\Projetos\Projeto InforSistemas\uConfiguracoes.pas</Transaction>
     <Transaction>2021/01/31 10:39:25.000.625,=D:\Projetos\Projeto InforSistemas\uRequisicao.pas</Transaction>
-    <Transaction>2021/01/31 13:30:07.471,D:\Projetos\Projeto InforSistemas\uRequisicao.pas=</Transaction>
+    <Transaction>2021/01/31 13:30:07.000.471,D:\Projetos\Projeto InforSistemas\uRequisicao.pas=</Transaction>
   </Transactions>
 </BorlandProject>

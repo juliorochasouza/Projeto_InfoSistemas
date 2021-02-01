@@ -15,7 +15,7 @@ IdText, IdPOP3, ACBrBase, IPPeerClient, REST.Client, Data.Bind.Components,
   Data.Bind.ObjectScope, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  REST.Response.Adapter ;
+  REST.Response.Adapter, Vcl.ComCtrls ;
 
 type
   TfrmCadastroClientes = class(TForm)
@@ -83,6 +83,7 @@ type
     RESTClient1: TRESTClient;
     RESTResponseDataSetAdapter1: TRESTResponseDataSetAdapter;
     FDMemTable1: TFDMemTable;
+    StatusBar1: TStatusBar;
     procedure btnNovoClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
@@ -155,16 +156,25 @@ end;
 
 procedure TfrmCadastroClientes.AtualizaBD;
 begin
-  if FileExists(ExtractFilePath(Application.ExeName)+'BD\Cliente.xml') then
-    if not DeleteFile(ExtractFilePath(Application.ExeName)+'BD\Cliente.xml') then
-       raise Exception.Create('Erro ao Excluir o arquivo de clientes');
+  try
+    // abreTransacao
 
-  if FileExists(ExtractFilePath(Application.ExeName)+'BD\Endereco.xml') then
-    if not DeleteFile(ExtractFilePath(Application.ExeName)+'BD\Endereco.xml') then
-       raise Exception.Create('Erro ao Excluir o arquivo de Endereço');
+    if FileExists(ExtractFilePath(Application.ExeName)+'BD\Cliente.xml') then
+      if not DeleteFile(ExtractFilePath(Application.ExeName)+'BD\Cliente.xml') then
+         raise Exception.Create('Erro ao Excluir o arquivo de clientes');
 
-  cdsCliente.SaveToFile(ExtractFilePath(Application.ExeName)+'BD\Cliente.xml', dfXML);
-  cdsEndereco.SaveToFile(ExtractFilePath(Application.ExeName)+'BD\Endereco.xml', dfXML);
+    if FileExists(ExtractFilePath(Application.ExeName)+'BD\Endereco.xml') then
+      if not DeleteFile(ExtractFilePath(Application.ExeName)+'BD\Endereco.xml') then
+         raise Exception.Create('Erro ao Excluir o arquivo de Endereço');
+
+    cdsCliente.SaveToFile(ExtractFilePath(Application.ExeName)+'BD\Cliente.xml', dfXML);
+    cdsEndereco.SaveToFile(ExtractFilePath(Application.ExeName)+'BD\Endereco.xml', dfXML);
+
+    // fechaTransacao
+  except
+    // se for banco de dados
+    // cancelaTransacao
+  end;
 end;
 
 procedure TfrmCadastroClientes.btnAlterarClick(Sender: TObject);
@@ -189,7 +199,15 @@ end;
 
 procedure TfrmCadastroClientes.btnEnviarEmailClick(Sender: TObject);
 begin
-   EnvioEmailAcbr;
+   try
+     StatusBar1.Panels[0].Text := 'AGUARDE !!! ENVIANDO EMAIL...';
+     Refresh;
+     btnEnviarEmail.Enabled := False;
+     EnvioEmailAcbr;
+   finally
+     StatusBar1.Panels[0].Text := '';
+     btnEnviarEmail.Enabled := True;
+   end;
 end;
 
 procedure TfrmCadastroClientes.btnExcluirClick(Sender: TObject);
@@ -450,7 +468,7 @@ end;
 
 procedure TfrmCadastroClientes.EnvioEmailAcbr;
 var
-  ArqXML: string;
+  ArqXML : String;
   MS: TMemoryStream;
   P, N: Integer;
 begin
@@ -462,13 +480,15 @@ begin
     AjustaParametrosDeEnvio;
     MS := TMemoryStream.Create;
     try
+
       ArqXML := 'Cliente.xml';
       MS.LoadFromFile(ExtractFilePath(Application.ExeName)+'BD\Cliente.xml');
-      ACBrMail1.AddAttachment(MS, ArqXML);
+      ACBrMail1.AddAttachment(MS, ArqXML, adAttachment);
+
 
       ArqXML := 'Endereco.xml';
       MS.LoadFromFile(ExtractFilePath(Application.ExeName)+'BD\Endereco.xml');
-      ACBrMail1.AddAttachment(MS, ArqXML);
+      ACBrMail1.AddAttachment(MS, ArqXML, adAttachment);
 
       ACBrMail1.Send(False);
 
@@ -498,8 +518,8 @@ begin
   ACBrMail1.Port := frmConfiguracao.cdsConfigPORT.AsString; // troque pela porta do seu servidor smtp
   ACBrMail1.SetTLS := (frmConfiguracao.cdsConfigTLS.AsString = 'S');
   ACBrMail1.SetSSL := (frmConfiguracao.cdsConfigSSL.AsString = 'S');  // Verifique se o seu servidor necessita SSL
-  //ACBrMail1.DefaultCharset := TMailCharset(cbbDefaultCharset.ItemIndex);
-  //ACBrMail1.IDECharset := TMailCharset(cbbIdeCharSet.ItemIndex);
+  ACBrMail1.DefaultCharset := TMailCharset(0);
+  ACBrMail1.IDECharset := TMailCharset(0);
   ACBrMail1.AddAddress(frmConfiguracao.cdsConfigEMAIL_TESTE.AsString, frmConfiguracao.cdsConfigFROM.AsString);
   ACBrMail1.Subject:= frmConfiguracao.cdsConfigASSUNTO.AsString;
   ACBrMail1.Body.Add(frmConfiguracao.cdsConfigMENSAGEM.AsString);

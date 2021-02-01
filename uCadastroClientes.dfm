@@ -12,7 +12,7 @@ object frmCadastroClientes: TfrmCadastroClientes
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  WindowState = wsMaximized
+  Position = poDesktopCenter
   OnKeyPress = FormKeyPress
   OnShow = FormShow
   PixelsPerInch = 96
@@ -21,10 +21,11 @@ object frmCadastroClientes: TfrmCadastroClientes
     Left = 0
     Top = 0
     Width = 201
-    Height = 668
+    Height = 649
     Align = alLeft
     ParentBackground = False
     TabOrder = 0
+    ExplicitHeight = 668
     object btnNovo: TButton
       Left = 24
       Top = 16
@@ -135,12 +136,13 @@ object frmCadastroClientes: TfrmCadastroClientes
     Left = 201
     Top = 0
     Width = 735
-    Height = 668
+    Height = 649
     Align = alClient
     TabOrder = 1
+    ExplicitHeight = 668
     DesignSize = (
       735
-      668)
+      649)
     object GroupBox1: TGroupBox
       Left = 6
       Top = 19
@@ -394,7 +396,7 @@ object frmCadastroClientes: TfrmCadastroClientes
       Left = 6
       Top = 297
       Width = 718
-      Height = 267
+      Height = 248
       Anchors = [akLeft, akTop, akRight, akBottom]
       Color = clInfoBk
       DataSource = dsCliente
@@ -437,7 +439,7 @@ object frmCadastroClientes: TfrmCadastroClientes
     end
     object DBGrid2: TDBGrid
       Left = 6
-      Top = 570
+      Top = 551
       Width = 718
       Height = 73
       Anchors = [akLeft, akRight, akBottom]
@@ -511,6 +513,19 @@ object frmCadastroClientes: TfrmCadastroClientes
       Anchors = [akLeft, akTop, akRight]
       TabOrder = 3
     end
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Top = 649
+    Width = 936
+    Height = 19
+    Panels = <
+      item
+        Width = 50
+      end>
+    ExplicitLeft = 480
+    ExplicitTop = 344
+    ExplicitWidth = 0
   end
   object dsCliente: TDataSource
     AutoEdit = False
